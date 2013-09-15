@@ -4,7 +4,7 @@ from flask import * #Flask,render_template,session,redirect,url_for
 app = Flask(__name__)
 app.secret_key = 'asdf12345'
 
-@app.route('/form2')
+@app.route('/bread')
 def select_bread():
   session['breading'] = True
   return render_template("quantity.html", flavorName = "sourdough") #should be most recent entry in DB table "BREAD OF WEEK"
