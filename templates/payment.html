@@ -1,0 +1,32 @@
+{% extends "form.html" %}
+
+{% block formPage %}
+<div id=paypal-connect>Login with Paypal</div>
+<div id=venmo-connect>Login with Venmo</div>
+<form action="{{ url_for('place_order') }}" method=post>
+  <div class="form-inline">
+    <div class="form-group">
+      <label class="sr-only" for="first-last-name">Name:</label>
+      <input type=text name="first-last-name" id="first-last-name" placeholder="Name" />
+    </div>
+    <div class="form-group">
+      <label class="sr-only" for="cc-num">Credit Card Number:</label>
+      <input type=text size=16 name=cc-num id=cc-num placeholder="Credit Card"/>
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="exp-date">Expiration Date:</label>
+      <input type=text name=exp-date id="exp-date" placeholder="MMYY"/>
+    </div>
+    <div class="form-group">
+      <label for="sec-code">Security Code:</label>
+      <input type=text size=3 name=sec-code />
+    </div>
+  </div>
+  <button type=submit class="btn btn-default">Place Order!</button>
+</form>
+<div class=button>
+  <p><a href=back>Nevermind, go back</a></p>
+</div>
+{% endblock %}

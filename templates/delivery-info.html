@@ -1,0 +1,29 @@
+{% extends "form.html" %}
+
+{% block formPage %}
+<div id=fb-connect>Login with Facebook</div>
+<br/>
+{% if error %}<p class=error><strong>Error:</strong> {{ error }}</p>{% endif %}
+<form action="{{url_for('enter_info')}}" method=post>
+  <div class=form-group>
+    <label class=sr-only for=deliver-address>Delivery Address:</label>
+    <input type=text name=delivery-address id=delivery-address placeholder=Address />
+  </div>
+  <div class=form-group> 
+    <label class=sr-only for=delivery-phone>Phone:</label>
+    <input type=text size=10 name=delivery-phone id=delivery-phone placeholder=Phone />
+  </div>
+  <div class=form-group> 
+    <label class=sr-only for=delivery-email>Email:</label>
+    <input type=text name=delivery-email id=delivery-email placeholder=Email />
+  </div>
+  <div class=form-group>
+    <label class=sr-only for=delivery-notes>Notes:</label>
+    <textarea name=delivery-notes id=delivery-notes placeholder="Delivery Notes"></textarea>
+  </div>
+  <button type=submit class="btn btn-default">Submit</button>
+</form>
+<div class=button>
+  <p><a href=back>Nevermind, go back</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "form.html" %}
+
+{% block formPage %}
+<h1>BREAD OF THE WEEK</h1>
+{% set bread="sourdough" %}
+<a href={{ bread }}>
+  <div class=acme id={{ bread }}>
+    <p>{{ bread.capitalize() }}</p>
+    <img class=img-responsive src="{{ url_for('static', filename=bread+'.JPG') }}" />
+  </div>
+</a>
+{% endblock %}

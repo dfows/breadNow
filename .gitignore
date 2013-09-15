@@ -1,0 +1,10 @@
+*.DS_Store
+static/node_modules/*
+*.less
+less-1.4.1.min.js
+timeOptions.html
+type.html
+flavors.html
+olive.html
+sweetdough.html
+sourdough.html

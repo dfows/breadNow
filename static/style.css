@@ -1,0 +1,29 @@
+.container {
+  margin: 0 25%;
+}
+a:hover {
+  text-decoration: none;
+}
+.acme,
+.number-loaves {
+  padding: 20px;
+}
+.acme:hover,
+.number-loaves:hover {
+  border: 1px black solid;
+}
+#breadHead h1,
+#breadHead h2 {
+  line-height: 20px;
+}
+#content {
+  padding: 50px 0;
+}
+#footer ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+#footer ul li {
+  display: inline;
+}
