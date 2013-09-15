@@ -1,13 +1,21 @@
-import os
+import os #, datetime
 from flask import * #Flask,render_template,session,redirect,url_for
+from pymongo import MongoClient
+import breads
 
 app = Flask(__name__)
 app.secret_key = 'asdf12345'
 
+client = MongoClient(os.getenv('MONGOHQ_URL'))
+database = client.dailyBread
+breadbox = breads.Breads(database)
+
 @app.route('/bread')
 def select_bread():
   session['breading'] = True
-  return render_template("quantity.html", flavorName = "sourdough") #should be most recent entry in DB table "BREAD OF WEEK"
+  bread_of_week = breadbox.get_bow()
+  print bread_of_week
+  return render_template("quantity.html", flavorName = bread_of_week) #should be most recent entry in DB table "BREAD OF WEEK"
 
 @app.route('/quantity')
 def select_quant(q):
@@ -33,8 +41,8 @@ def place_order():
   session['cc_num'] = request.form['cc-num']
   session['exp_date'] = request.form['exp-date']
   session['sec_code'] = request.form['sec-code']
-  print session
-  return render_template("orderPlaced.html")
+  breadbox.place_order(session['quantity'],session['name'],session['address'],session['phone'],session['email'],session['cc_num'],session['exp_date'],session['sec_code'])
+  return render_template("orderPlaced.html", name=session['name'], address=session['address'], email=session['email'], numLoaves=session['quantity'])
 
 @app.route('/')
 def load_main():
