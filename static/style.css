@@ -4,13 +4,25 @@
 a:hover {
   text-decoration: none;
 }
+#bow {
+  text-transform: uppercase;
+  font-weight: bold;
+}
 .acme,
 .number-loaves {
+  background-image: url('/static/baguettes.png');
+  background-position: 0;
+  background-size: 100%;
+  margin: 15px 0;
+  text-align: center;
   padding: 20px;
 }
-.acme:hover,
-.number-loaves:hover {
-  border: 1px black solid;
+.number-loaves h1 {
+  padding: 10px;
+  width: 75%;
+  margin: auto;
+  background-color: lightgray;
+  color: lightsalmon;
 }
 #breadHead h1,
 #breadHead h2 {

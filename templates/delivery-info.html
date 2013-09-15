@@ -1,7 +1,7 @@
 {% extends "form.html" %}
 
 {% block formPage %}
-<div id=fb-connect>Login with Facebook</div>
+<div id=fb-connect><a href="#">Login with Facebook</a></div>
 <br/>
 {% if error %}<p class=error><strong>Error:</strong> {{ error }}</p>{% endif %}
 <form action="{{url_for('enter_info')}}" method=post>

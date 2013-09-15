@@ -1,8 +1,5 @@
 {% extends "head.html" %}
 
 {% block content %}
-{% set bread = "sourdough" %}
-<h1>ORDER PLACED! here's your order:</h1>
-<p>Hello, {{ name }}, your order for {{ numLoaves }} {{ bread }} has been placed and will be shipped to {{ address }}.  You will receive an email at {{ email }} as a receipt.</p>
-{% include "referral.html" %}
+<h1>Your {{bread}} will arrive at {{ ordertime }}!</h1>
 {% endblock %}
