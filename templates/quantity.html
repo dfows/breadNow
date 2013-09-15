@@ -5,12 +5,13 @@
   <p>BREAD OF THE WEEK: {{ flavorName }}</p>
 </div>
 {% for i in range(1,4): %}
-  <a href=delivery-info value="{{ i }}">
+  <a href="{{url_for('select_quant',q=i)}}" value="{{ i }}">
   <div class=number-loaves id="{{ i }}loaf">
     <h1>{{ i }} loaves</h1>
   </div>
   </a>
 {% endfor %}
+</form>
 <div class=button>
   <p><a href=back>Nevermind, go back</a></p>
 </div>

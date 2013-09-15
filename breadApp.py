@@ -14,11 +14,11 @@ breadbox = breads.Breads(database)
 def select_bread():
   session['breading'] = True
   bread_of_week = breadbox.get_bow()
-  print bread_of_week
   return render_template("quantity.html", flavorName = bread_of_week) #should be most recent entry in DB table "BREAD OF WEEK"
 
-@app.route('/quantity')
+@app.route('/quantity/<q>')
 def select_quant(q):
+  print "q is", q
   session['quantity'] = q
   return render_template("delivery-info.html")
 
