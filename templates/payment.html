@@ -4,7 +4,7 @@
 <div id=paypal-connect><a href="#">Login with Paypal</a></div>
 <div id=venmo-connect><a href="#">Login with Venmo</a></div>
 <br/>
-<form action="{{ url_for('place_order') }}" method=post>
+<form action="{{ url_for('view_receipt') }}" method=post>
     <div class="form-group">
       <label class="sr-only" for="first-last-name">Name:</label>
       <input type=text name="first-last-name" id="first-last-name" placeholder="Name" />
@@ -24,6 +24,6 @@
   <button type=submit class="btn btn-default">Place Order!</button>
 </form>
 <div class=button>
-  <p><a href=back>Nevermind, go back</a></p>
+  <p><a href="delivery-info">Nevermind, go back</a></p>
 </div>
 {% endblock %}
