@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body": "^4.5.0",
-    "express": "^4.9.7"
+    "express": "^4.9.7",
+    "stripe": "^2.8.0"
   }
 }
