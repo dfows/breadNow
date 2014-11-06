@@ -63,10 +63,10 @@ function finalizeOrder() {
     url: '/charge',
     data: JSON.stringify(orderObj),
     type: 'POST',
-    success: function() {
-      console.log("yep");
+    success: function(d) {
+      var successText = JSON.parse(d).responseText;
       $orderForm.hide();
-      $msg.text('Thanks for your order').show();
+      $msg.text(successText).show();
     },
     error: function() {
       console.log("nope");
@@ -88,9 +88,9 @@ function generateOrderForm() {
   $.ajax({
     url: '/getBread',
     success: function(b) {
-      var bObj = JSON.parse(b).responseText;
-      var breadName = bObj.breadName;
-      var breadPrice = bObj.breadPrice.toFixed(2);
+      var bObj = JSON.parse(JSON.parse(b).responseText);
+      var breadName = bObj.name;
+      var breadPrice = bObj.price.toFixed(2);
       $bread.text(breadName);
       $price.text("$"+breadPrice);
     },
