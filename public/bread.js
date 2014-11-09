@@ -35,13 +35,11 @@ function showPage() {
 
 // save after changing forms
 function updateOrder(params) {
-  console.log("####PARAMS####",params);
   var order = JSON.parse(localStorage['order']);
   for (var key in params) {
     order[key] = params[key];
   }
   localStorage['order'] = JSON.stringify(order);
-  console.log("####ORDER####",localStorage['order']);
 }
 
 // submit order
@@ -96,7 +94,6 @@ function generateOrderForm() {
     var obj = {bread: $bread.text(),
                price: $price.text().slice(1), //dont want that dolla sign
                number: $number.val()};
-    console.log("THE PRICE IS RIGHT",obj.price);
     updateOrder(obj);
     nextPage();
   };
@@ -182,7 +179,6 @@ function generateConfirmationPage() {
   var $continue = $('<a>').addClass('btn btn-lg').text('next');
 
   var order = JSON.parse(localStorage['order']);
-  console.log("uhhh, order",order);
   for (var key in order) {
     var val = (key === 'price') ? '$'+order[key] : order[key];
     var $field = $('<div>').addClass('order-detail').text(key+': '+val);

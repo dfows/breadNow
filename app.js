@@ -53,14 +53,14 @@ function placeOrder(order, callback) {
 function sendReceipt(order) {
   // text receipt to a person
   twilio.sendMessage({
-    to:'+1'+'6468428860',//+order.phone,
+    to:'+1'+order.phone,
     from: process.env.TWIL_NUM,
-    body: 'word to your mother.'
+    body: 'Thanks for your order! Bread is on its way. Text this number to check ETA.'
 
   }, function(err, responseData) {
     if (!err) { // "err" is an error received during the request, if any
-        console.log(responseData.from); // outputs "+14506667788"
-        console.log(responseData.body); // outputs "word to your mother."
+        console.log(responseData.from);
+        console.log(responseData.body);
     }
   });
 }
