@@ -18,11 +18,7 @@ var $msg = $('#msg').hide();
 if (!localStorage['order']) { localStorage['order'] = JSON.stringify({}); }
 
 // form templates
-var form0 = generateOrderForm();
-var form1 = generateShippingForm();
-var form2 = generatePaymentForm();
-var form3 = generateConfirmationPage();
-var formTemplates = [form0,form1,form2,form3];
+var formTemplateFns = [generateOrderForm,generateShippingForm,generatePaymentForm,generateConfirmationPage];
 
 // display forms
 function prevPage() {
@@ -30,25 +26,22 @@ function prevPage() {
   showPage();
 }
 function nextPage() {
-  pageNum = pageNum < formTemplates.length-1 ? pageNum+1 : formTemplates.length-1;
+  pageNum = pageNum < formTemplateFns.length-1 ? pageNum+1 : formTemplateFns.length-1;
   showPage();
 }
 function showPage() {
-  $orderForm.empty().append(formTemplates[pageNum]);
+  $orderForm.empty().append(formTemplateFns[pageNum]());
 }
 
 // save after changing forms
 function updateOrder(params) {
+  console.log("####PARAMS####",params);
   var order = JSON.parse(localStorage['order']);
   for (var key in params) {
     order[key] = params[key];
   }
   localStorage['order'] = JSON.stringify(order);
-}
-
-// review order
-function reviewOrder() {
-  return JSON.parse(localStorage['order']);
+  console.log("####ORDER####",localStorage['order']);
 }
 
 // submit order
@@ -173,7 +166,6 @@ function generatePaymentForm() {
       exp_year: $expYr.val()
     }, function(err, response) {
       if (err) { console.log(err); }
-      console.log("sup token",response.id);
       token = response.id;
     });
     nextPage();
@@ -189,7 +181,8 @@ function generateConfirmationPage() {
   var $back = $('<a>').addClass('btn btn-lg').text('prev');
   var $continue = $('<a>').addClass('btn btn-lg').text('next');
 
-  var order = reviewOrder();
+  var order = JSON.parse(localStorage['order']);
+  console.log("uhhh, order",order);
   for (var key in order) {
     var val = (key === 'price') ? '$'+order[key] : order[key];
     var $field = $('<div>').addClass('order-detail').text(key+': '+val);
@@ -200,7 +193,6 @@ function generateConfirmationPage() {
     prevPage();
   };
   $continue[0].onclick = function() {
-    console.log("sup");
     finalizeOrder();
   };
 

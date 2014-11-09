@@ -3,7 +3,8 @@ var path = require('path');
 var body = require('body/json');
 var mongo = require('mongodb');
 var monk = require('monk');
-var stripe = require('stripe')("sk_test_IsqqoxGSOG3a4lUaplTaNwh5");
+var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+var twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 var db = monk('mongodb://jessica:what@kahana.mongohq.com:10069/asdf');
 var table_breads = db.get('breads');
@@ -33,7 +34,7 @@ app.post('/charge', function(req,res) {
       var datePlaced = new Date();
       order['datePlaced'] = datePlaced.toUTCString();
       placeOrder(order, function() {
-        //sendReceipt(order);
+        sendReceipt(order);
         res.end(JSON.stringify({status:200,responseText:"Order successfully placed at "+datePlaced.toString()+". Thank you!"}));
       });
     });
@@ -50,7 +51,18 @@ function placeOrder(order, callback) {
 }
 
 function sendReceipt(order) {
-  // email receipt to a person
+  // text receipt to a person
+  twilio.sendMessage({
+    to:'+1'+'6468428860',//+order.phone,
+    from: process.env.TWIL_NUM,
+    body: 'word to your mother.'
+
+  }, function(err, responseData) {
+    if (!err) { // "err" is an error received during the request, if any
+        console.log(responseData.from); // outputs "+14506667788"
+        console.log(responseData.body); // outputs "word to your mother."
+    }
+  });
 }
 
 function logError(err) {
